@@ -4,7 +4,7 @@
   <script src="Scripts\angular-1.6.9\angular.js"></script>
   <script src="Scripts\angular-1.6.9\angular-route.js"></script>
 <body ng-app="myApp">
-  <p><a href="#/!">NGRounting</a></p>
+  <p><a href="#/!">Main</a></p>
   <a href="#!red">Red</a>
   <a href="#!green">Green</a>
   <a href="#!blue">Blue</a>
@@ -15,7 +15,7 @@
     app.config(function($routeProvider) {
         $routeProvider
         .when("/", {
-            templateUrl : "NGRounting.htm"
+            templateUrl : "main.htm"
         })
         .when("/red", {
             templateUrl : "red.htm"
@@ -28,6 +28,6 @@
         });
     });
   </script>
-  <p>Click on the links to navigate to "red.htm", "green.htm", "blue.htm", or back to "NGRounting.htm"</p>
+  <p>Click on the links to navigate to "red.htm", "green.htm", "blue.htm", or back to "main.htm"</p>
 </body>
 </html>
