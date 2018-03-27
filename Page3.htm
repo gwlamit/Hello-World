@@ -68,17 +68,17 @@
     .config(['$routeProvider',
         function($routeProvider) {
         $routeProvider
-        .when("/NewEvent", {
+        .when('/NewEvent', {
             templateUrl : "add_event.htm",
             controller : 'AddEventController'
         })
-        .when("/DisplayEvent", {
+        .when('/DisplayEvent', {
             templateUrl : "show_event.htm",
             controller : 'ShowDisplayController'
-        })
-        .otherwise({
-          redirectTo: '/DisplayEvent'
         });
+        //.otherwise({
+        //  redirectTo: '/DisplayEvent'
+        //  });
     }]);
     //Function 1
     function DIController($scope, $filter){
