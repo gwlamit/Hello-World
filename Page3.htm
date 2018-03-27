@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html ng-app="myFirstApp">
+  <script src="Scripts\angular-1.6.9\angular.min.js"></script>
+  <script src="Scripts\angular-1.6.9\angular.js"></script>
+  <script src="Scripts\angular-1.6.9\angular-route.js"></script>
+  <script>
+  (function(){
+    'use strict';
+    var x="tets";
+    angular.module('myFirstApp',['ngRoute'])
+    //Controller 1
+    .controller('MyFirstController',function($scope){
+      $scope.name="";
+      $scope.totalvalue=0;
+      $scope.sayHello=function(){
+        return "All OK";
+      };
+      $scope.displaynumeric = function() {
+        var totalnamevalue =calc($scope.name);
+        $scope.totalvalue=totalnamevalue;
+      };
+      function calc(string){
+        var totalstringvalue=0;
+        for (var i=0; i< string.length; i++){
+          totalstringvalue += string.charCodeAt(i);
+        }
+        return totalstringvalue;
+      };
+    })
+    //Controller 2
+    .controller('DIController',DIController)
+    //Controller 3
+    .controller('MyJSONList',function($scope){
+      $scope.topic=
+        {
+          TopicName : [
+            {name : "Test One"},
+            {name : "Test Two"},
+            {name : "Test Three"}
+          ]
+        }
+    })
+    //Controller 4
+    .controller('A1',function($scope){
+      $scope.a1name="First Name";
+    })
+    //Controller 5
+    .controller('A2',function($scope){
+      $scope.a2name="Second Name";
+    })
+    //Controller 6
+    .controller('MyJSONSelect',function($scope){
+      $scope.Topics=
+      {
+        option1:"Option 1",
+        option2:"Option 2"
+      };
+    })
+    //Controller 7
+    .controller('AddEventController',function($scope){
+      $scope.message="You are in Add Event Controller";    })
+    //Controller 8
+    .controller('ShowDisplayController',function($scope){
+      $scope.message="You are in Show Display Controller";
+    })    
+    //Config 1
+    .config(['$routeProvider',
+        function($routeProvider) {
+        $routeProvider
+        .when("/NewEvent", {
+            templateUrl : "add_event.htm",
+            controller : 'AddEventController'
+        })
+        .when("/DisplayEvent", {
+            templateUrl : "show_event.htm",
+            controller : 'ShowDisplayController'
+        })
+        .otherwise({
+          reditectTo: '/DisplayEvent'
+        });
+    }]);
+    //Function 1
+    function DIController($scope, $filter){
+      $scope.DIname="DI Test";
+      
+      $scope.upper=function(){
+        var upCase = $filter('uppercase');
+        $scope.DIname=upCase($scope.DIname);
+      }
+    };
+  })();
+  </script>
+  <body>  
+    <h1>"Hello Angular"</h1>
+    <p> <BR><BR>-----------Exercise 1 (Count Number Value)-------------<BR></p>
+    <div ng-controller="MyFirstController">
+      Enter any Name: <input type="text" ng-model="name" ng-keyup="displaynumeric();">    
+      <div> You entered {{name }}. Total Numeric Value: {{totalvalue}}</div>
+    </div>  
+    <p> <BR>----------Exercise 2 (Upper Case)------------<BR></p>
+    <div ng-controller="DIController">
+      Enter any Name and move out from text field: <input type="text" ng-model="DIname" ng-blur="upper();">    
+    </div>  
+    <p> <BR>----------Exercise 3 (JSON)------------<BR></p>
+    <div ng-controller="MyJSONList">
+      <ul><li ng-repeat="tpname in topic.TopicName">
+            {{tpname.name}}
+          </li>
+      </ul>    
+    </div>    
+    <p> <BR>----------Exercise 4 (Nested Controller)------------<BR></p>
+    <div ng-controller="A1">
+      <div ng-controller="A2">
+      <p></p>
+        Name: {{a1name + " " + a2name}}
+      </div>      
+    </div>        
+    <p> <BR>----------Exercise 5 (JSON Select)------------<BR></p>
+    <div ng-controller="MyJSONSelect">
+      <form>
+      <select ng-model="Topics">
+        <option>{{Topics.option1}}</option>
+        <option>{{Topics.option2}}</option>
+      </select>
+      </form>
+    </div>    
+    <p> <BR>----------Exercise 6 (Route)------------<BR></p>
+    <div class="container">
+      <li> <a href="#NewEvent"> Add New Event </a></li>
+      <li> <a href="#DisplayEvent"> Display Event </a></li>
+      <div ng-view> </div>
+    </div>    
+  </body>
+</html>
