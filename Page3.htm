@@ -58,7 +58,8 @@
     })
     //Controller 7
     .controller('AddEventController',function($scope){
-      $scope.message="You are in Add Event Controller";    })
+      $scope.message="You are in Add Event Controller";    
+    })
     //Controller 8
     .controller('ShowDisplayController',function($scope){
       $scope.message="You are in Show Display Controller";
@@ -76,7 +77,7 @@
             controller : 'ShowDisplayController'
         })
         .otherwise({
-          reditectTo: '/DisplayEvent'
+          redirectTo: '/DisplayEvent'
         });
     }]);
     //Function 1
