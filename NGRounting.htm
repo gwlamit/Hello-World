@@ -12,13 +12,17 @@
 
   <script>
     var app = angular.module("myApp", ["ngRoute"]);
+    app.controller("RedController",function($scope){
+      $scope.message("In Red Page");    
+    });
     app.config(function($routeProvider) {
         $routeProvider
         .when("/", {
             templateUrl : "main.htm"
         })
         .when("/red", {
-            templateUrl : "red.htm"
+            templateUrl : "red.htm",
+            controller: "RedController"
         })
         .when("/green", {
             templateUrl : "green.htm"
