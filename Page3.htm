@@ -69,18 +69,34 @@
       $scope.testv="Demo Custom Filter";
       $scope.testjson={TID: 1, TNAME:"Oracle"}
     })
+    //Controller 10
+    .controller('CustDirController',function($scope){
+      this.testv1="Demo Custom Directive with Controller";      
+    })    
     //Filter
     .filter('MyFilter',function(){
       return function(input){
         return input + " " + " Applied Custom Filter";
       }
     })
-    //Custom Directive
+    //Custom Directive 1
     .directive('ngCustom', function(){
       return {
-        template: '<div> Angular Custom Directive </div>'
+        controller: 'CustDirController',
+        controllerAs: 'ctrl',
+        template: '<div> Angular Custom Directive {{ctrl.testv1}} <br> Name: <input type="text"> <br> <br> &nbsp;&nbsp;&nbsp;Age: <input type="text"></div>'
         }
     })
+    //Custom Directive 2
+    .directive('customtag', function(){
+      return {
+        transclude: true,
+        scope: {title: '@'},
+        template: '<div style="border: 1px solid red;">' +
+                   '<ng-transclude></ng-transclude>'+
+                   '</div>'
+        }
+    })    
     //Config 1
     .config(['$routeProvider',
         function($routeProvider) {
@@ -158,7 +174,13 @@
      JSON Test: {{testjson|json}}     
     </div>    
     <p> <BR>----------Exercise 8 (Custom Directives)------------<BR></p>
-    <div ng-custom="">
-    </div>        
+    <div ng-controller="CustDirController">
+      <div ng-custom="" >
+      </div>        
+    </div>
+    <p> <BR>----------Exercise 9 (Custom Directives transclude)------------<BR></p>  
+    <div>
+      <customtag title="{{title}}"> Angular JS</customtag>
+    </div>    
   </body>
 </html>
