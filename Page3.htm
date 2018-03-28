@@ -64,6 +64,23 @@
     .controller('ShowDisplayController',function($scope){
       $scope.message="You are in Show Display Controller";
     })    
+    //Controller 9
+    .controller('MyCustFilter',function($scope){
+      $scope.testv="Demo Custom Filter";
+      $scope.testjson={TID: 1, TNAME:"Oracle"}
+    })
+    //Filter
+    .filter('MyFilter',function(){
+      return function(input){
+        return input + " " + " Applied Custom Filter";
+      }
+    })
+    //Custom Directive
+    .directive('ngCustom', function(){
+      return {
+        template: '<div> Angular Custom Directive </div>'
+        }
+    })
     //Config 1
     .config(['$routeProvider',
         function($routeProvider) {
@@ -131,5 +148,17 @@
       <li> <a href="#!DisplayEvent"> Display Event </a></li>
       <div ng-view> </div>
     </div>    
+    <p> <BR>----------Exercise 7 (Custom Filter and Standard)------------<BR></p>
+    <div ng-controller="MyCustFilter" >
+      TEST in lowercase {{'TEST'|lowercase}} <BR>
+      test in uppercase {{'TEST'|uppercase}}<BR>
+     2 in Number filter {{'2'|number:2}}<BR>
+     2 in currency filter {{2|currency}}<BR>
+     Custom Event: {{testv|MyFilter}} <BR>
+     JSON Test: {{testjson|json}}     
+    </div>    
+    <p> <BR>----------Exercise 8 (Custom Directives)------------<BR></p>
+    <div ng-custom="">
+    </div>        
   </body>
 </html>
