@@ -73,6 +73,13 @@
     .controller('CustDirController',function($scope){
       this.testv1="Demo Custom Directive with Controller";      
     })    
+    //Controller 11
+    .controller('ShowHide',function($scope){
+      $scope.IsVisible=false;
+      $scope.ShowHide=function(){
+        $scope.IsVisible=true;
+      }
+    })        
     //Filter
     .filter('MyFilter',function(){
       return function(input){
@@ -97,6 +104,29 @@
                    '</div>'
         }
     })    
+    //Custom Directive 3
+    .directive('outer', function(){
+      return {
+        restrict: 'E',
+        template: '<div> <h1> Outer </h1><inner></inner></div>'
+        }
+    })    
+    //Custom Directive 4
+    .directive('inner', function(){
+      return {
+        restrict: 'E',
+        template: '<div> <h1>Inner</div>'
+        }
+    })    
+    //Custom Directive 5
+    .directive('ngClickme', function(){
+      return {
+        link: function($scope,element, attrs){
+          element.bind('click', function(){
+            element.html('You Clicked Me!!');
+          })
+        }
+    }})    
     //Config 1
     .config(['$routeProvider',
         function($routeProvider) {
@@ -182,5 +212,19 @@
     <div>
       <customtag title="{{title}}"> Angular JS</customtag>
     </div>    
+    <p> <BR>----------Exercise 10 (Custom Directives Nested)------------<BR></p>  
+    <div>
+      <outer></outer>
+    </div>        
+    <p> <BR>----------Exercise 11 (Custom Directives Events)------------<BR></p>  
+    <div ng-clickme ="">Click me</div>
+    <p> <BR>----------Exercise 12 (ng-click)------------<BR></p>  
+    <button ng-click="count = count + 1" ng-init="count=0"> Increment </button>
+    <div> Click Count is: {{count}}</div
+    <p> <BR>----------Exercise 13 (ng-show)------------<BR></p>  
+    <div ng-controller="ShowHide">
+      <input type="button" value= "Show Angular" ng-click="ShowHide();" />
+      <br><div ng-show="IsVisible"> Angular</div>
+    </div>
   </body>
 </html>
