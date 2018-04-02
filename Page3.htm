@@ -3,6 +3,8 @@
   <script src="Scripts\angular-1.6.9\angular.min.js"></script>
   <script src="Scripts\angular-1.6.9\angular.js"></script>
   <script src="Scripts\angular-1.6.9\angular-route.js"></script>
+  <script src="Scripts\angular-1.6.9\angular-resource.js"></script>
+  <script src="Scripts\angular-1.6.9\angular-resource.min.js"></script>
   <script>
   (function(){
     'use strict';
@@ -241,6 +243,7 @@
     </div>
     <p> <BR>----------Exercise 14 (http JSON AJAX)------------<BR></p>  
     <div ng-controller="httpAJAXServiceDemo">
+      {{topics}}
       <table>
         <tr ng-repeat="x in topics">
           <td>{{ x.Name }}</td>
