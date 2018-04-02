@@ -86,11 +86,14 @@
     })      
     //Controller 12
     .controller('httpAJAXServiceDemo',function($scope,$http){
-      $http.get("https://gwlamit.github.io/Hello-World/getTopicJSON.htm")
-      .then(function(response)
-      {
-        $scope.topics=response.data.records;
-      });
+      $http({
+        method: "GET",
+        url:"https://gwlamit.github.io/Hello-World/getTopicJSON.htm"
+      }).then (function mySuccess(response){
+        $scope.topics=response.data;
+       },function myError(response){
+        $scope.topics=response.statusText;
+       })
     })        
     
     //Filter
@@ -243,7 +246,7 @@
     </div>
     <p> <BR>----------Exercise 14 (http JSON AJAX)------------<BR></p>  
     <div ng-controller="httpAJAXServiceDemo">
-      {{topics}}
+      Response: {{topics|json}}
       <table>
         <tr ng-repeat="x in topics">
           <td>{{ x.Name }}</td>
