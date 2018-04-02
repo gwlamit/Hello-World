@@ -57,12 +57,14 @@
       };
     })
     //Controller 7
-    .controller('AddEventController',function($scope){      
-      $scope.message="You are in Add Event Controller and parameter passed." + $routeParams.topicId;    
+    .controller('AddEventController',function($scope,$routeParams){      
+      $scope.message="You are in Add Event Controller and parameter passed.";    
+      $scope.tid=$routeParams.topicId;
     })
     //Controller 8
-    .controller('ShowDisplayController',function($scope){
-      $scope.message="You are in Show Display Controller and parameter passed. " + $routeParams.topicId;
+    .controller('ShowDisplayController',function($scope,$routeParams){
+      $scope.message="You are in Show Display Controller and parameter passed.";
+      $scope.tid=$routeParams.topicId;
     })    
     //Controller 9
     .controller('MyCustFilter',function($scope){
@@ -192,7 +194,7 @@
     <div class="container">
       <li> <a href="#!NewEvent/1"> Add New Event </a></li>
       <li> <a href="#!DisplayEvent/2"> Display Event </a></li>
-      <div ng-view> </div>
+      <div ng-view> {{tid}}</div>
     </div>    
     <p> <BR>----------Exercise 7 (Custom Filter and Standard)------------<BR></p>
     <div ng-controller="MyCustFilter" >
