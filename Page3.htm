@@ -58,12 +58,12 @@
     })
     //Controller 7
     .controller('AddEventController',function($scope,$routeParams,$route){      
-      $scope.message="You are in Add Event Controller and parameter passed." + $route.current.myText;  
+      $scope.message="You are in Add Event Controller and parameter passed." + $route.current.myText + " " + $routeParams.topicId;  
       $scope.tid=$routeParams.topicId;
     })
     //Controller 8
     .controller('ShowDisplayController',function($scope,$routeParams,$route){
-      $scope.message="You are in Show Display Controller and parameter passed." + $route.current.myText;
+      $scope.message="You are in Show Display Controller and parameter passed." + $route.current.myText + " " + $routeParams.topicId;
       $scope.tid=$routeParams.topicId;
     })    
     //Controller 9
