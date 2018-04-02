@@ -57,12 +57,12 @@
       };
     })
     //Controller 7
-    .controller('AddEventController',function($scope){
-      $scope.message="You are in Add Event Controller";    
+    .controller('AddEventController',function($scope){      
+      $scope.message="You are in Add Event Controller and parameter passed." + $routeParams.topicId;    
     })
     //Controller 8
     .controller('ShowDisplayController',function($scope){
-      $scope.message="You are in Show Display Controller";
+      $scope.message="You are in Show Display Controller and parameter passed. " + $routeParams.topicId;
     })    
     //Controller 9
     .controller('MyCustFilter',function($scope){
@@ -131,11 +131,11 @@
     .config(['$routeProvider',
         function($routeProvider) {
         $routeProvider
-        .when('/NewEvent', {
+        .when('/NewEvent/:topicId', {
             templateUrl : "add_event.htm",
             controller : 'AddEventController'
         })
-        .when('/DisplayEvent', {
+        .when('/DisplayEvent/:topicId', {
             templateUrl : "show_event.htm",
             controller : 'ShowDisplayController'
         })
@@ -190,8 +190,8 @@
     </div>    
     <p> <BR>----------Exercise 6 (Route)------------<BR></p>
     <div class="container">
-      <li> <a href="#!NewEvent"> Add New Event </a></li>
-      <li> <a href="#!DisplayEvent"> Display Event </a></li>
+      <li> <a href="#!NewEvent/1"> Add New Event </a></li>
+      <li> <a href="#!DisplayEvent/2"> Display Event </a></li>
       <div ng-view> </div>
     </div>    
     <p> <BR>----------Exercise 7 (Custom Filter and Standard)------------<BR></p>
