@@ -81,7 +81,16 @@
       $scope.ShowHide=function(){
         $scope.IsVisible=true;
       }
+    })      
+    //Controller 12
+    .controller('httpAJAXServiceDemo',function($scope,$http){
+      $http.get("https://gwlamit.github.io/Hello-World/getTopicJSON.htm")
+      .then(function(response)
+      {
+        $scope.topics=response.data.records;
+      });
     })        
+    
     //Filter
     .filter('MyFilter',function(){
       return function(input){
@@ -230,5 +239,14 @@
       <input type="button" value= "Show Angular" ng-click="ShowHide();" />
       <br><div ng-show="IsVisible"> Angular</div>
     </div>
+    <p> <BR>----------Exercise 14 (http JSON AJAX)------------<BR></p>  
+    <div ng-controller="httpAJAXServiceDemo">
+      <table>
+        <tr ng-repeat="x in topics">
+          <td>{{ x.Name }}</td>
+          <td>{{ x.Description }}</td>
+        </tr>
+      </table>    
+    </div>        
   </body>
 </html>
