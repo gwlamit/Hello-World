@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html ng-app="myFirstApp">
+  <style>
+    table, th, td {border: 1px solid black; padding; 5px;}d
+  </style>
   <script src="Scripts\angular-1.6.9\angular.min.js"></script>
   <script src="Scripts\angular-1.6.9\angular.js"></script>
   <script src="Scripts\angular-1.6.9\angular-route.js"></script>
@@ -90,10 +93,21 @@
         method: "GET",
         url:"https://gwlamit.github.io/Hello-World/getTopicJSON.htm"
       }).then (function mySuccess(response){
-        $scope.topics=response.data;
+        $scope.topics=response.data.records;
        },function myError(response){
         $scope.topics=response.statusText;
        })
+    })        
+    //Controller 13
+    .controller('validateController',function($scope,$http){
+      $scope.AllTopic=[];
+      $scope.Display =function(){
+        $scope.AllTopic.push($scope.Topic);
+      }
+    })        
+    //Controller 14
+    .controller('validateController1',function($scope,$http){
+      $scope.user='AngularJS';
     })        
     
     //Filter
@@ -246,13 +260,45 @@
     </div>
     <p> <BR>----------Exercise 14 (http JSON AJAX)------------<BR></p>  
     <div ng-controller="httpAJAXServiceDemo">
-      Response: {{topics|json}}
-      <table>
-        <tr ng-repeat="x in topics">
-          <td>{{ x.Name }}</td>
+      <table style="border: 1px solid red";>
+        <tr>
+          <td> SN</td>
+          <td> Name</td>
+          <td> Description</td>
+        </tr>
+        <tr ng-repeat="x in topics | orderBy: 'Name' ">
+          <td>{{ $index + 1}}</td>
+          <td>{{ x.Name | uppercase}}</td>
           <td>{{ x.Description }}</td>
         </tr>
       </table>    
     </div>        
+    <p> <BR>----------Exercise 15 (Validate)------------<BR></p>  
+    <div ng-controller="validateController">
+      <form ng-submit="Display()">
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        Enter Which Topic You Would Like to Learn: 
+        <input type="text" ng-model="Topic"/><br>&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="submit" value ="Submit"/>
+        <ul ng-repeat="x in AllTopic">
+          <li> {{x}}
+          </li>          
+        </ul>
+      </form>
+    </div>        
+    <p> <BR>----------Exercise 16 (Validate II)------------<BR></p>  
+    <div ng-controller="validateController1" >
+      <form name="myForm" novalidate>
+        <p>Topic Name: <br>
+          <input type="text" name="user" ng-model="user" required/>
+          <span  style="color:red" ng-show="myForm.user.$dirty && myForm.user.$invalid">
+            <span ng-show ="myForm.user.$error.required"> Username is required </span>
+          </span>
+        </p>
+        <p>
+          <input type="submit" value ="Submit" ng-disabled="myForm.user.$dirty && myForm.user.$invalid"/>
+        </p>
+      </form>  
+    </div>            
   </body>
 </html>
